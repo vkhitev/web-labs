@@ -16,7 +16,7 @@
     function checkInput($rows, $cols, $tableID) {
       return (inRange($rows, 1, 50) &&
               inRange($cols, 1, 50) &&
-              inRange($tableID, 0, 3));
+              inRange($tableID, 1, 4));
     }
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -24,8 +24,6 @@
         $rows = $_POST['rows'];
         $cols = $_POST['cols'];
         $tableID = $_POST['tableID'];
-
-        bdManipulations($rows, $cols, $tableID);
 
         if (!checkInput($rows, $cols, $tableID)) {
           echo 'Wrong input values';

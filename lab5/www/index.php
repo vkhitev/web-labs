@@ -5,26 +5,67 @@
     <title>Lab 5</title>
   </head>
   <body>
+    <?php
+    $arr = array();
+    $elements = 2000;
+    for ($i=0; $i < $elements; $i++) {
+      array_push($arr, $i);
+    }
+    shuffle($arr);
 
+    echo "Initial array of " . $elements . " elements </br></br>";
+
+    $times = array();
+
+    $times ['selection'] = echoSort($arr, 'selection');
+    $times ['insertion'] = echoSort($arr, 'insertion');
+    $times ['bubble']    = echoSort($arr, 'bubble');
+    $times ['quick']     = echoSort($arr, 'quick');
+    $times ['gnome']     = echoSort($arr, 'gnome');
+
+    $min_val = min($times);
+    $min_key = array_search($min_val, $times);
+
+    echo "Most efficient algorithm: </br>" . ucwords(strtolower($min_key))
+         . " sort: " . $min_val . " sec";
+    echo "</br></br></br>";
+
+    echoSort(array_slice($arr, 0, 8), 'random');
+
+    ?>
   </body>
 </html>
 
 <?php
 
+function microtime_float()
+{
+    list($usec, $sec) = explode(" ", microtime());
+    return ((float)$usec + (float)$sec);
+}
+
+function echoSort($arr, $algName) {
+  $a = array();
+  $start = microtime_float();
+  switch ($algName) {
+    case 'selection': $a = selectionSort($arr); break;
+    case 'insertion': $a = insertionSort($arr); break;
+    case 'random': $a = randomSort($arr); $algName .= ' (on 8 elements) '; break;
+    case 'bubble': $a = bubbleSort($arr); break;
+    case 'quick': $a = quickSort($arr); break;
+    case 'gnome': $a = gnomeSort($arr); break;
+    default: echo 'Unknown sort algorithm: ' . $algName; return;
+  }
+  $time_elapsed_secs = microtime_float() - $start;
+  echo ucwords(strtolower($algName)) . ' sort' . "</br>";
+  // echo implode($a, " ");
+  echo "Time elapsed: ", $time_elapsed_secs, " sec</br></br>";
+  return $time_elapsed_secs;
+}
+
 function swap(&$x, &$y) {
     $tmp=$x; $x=$y; $y=$tmp;
 }
-
-$arr = array(7, 3, 9, 6, 5, 1, 2, 0, 8, 4);
-
-echo implode(selectionSort($arr), " "), "</br>";
-echo implode(insertionSort($arr), " "), "</br>";
-// echo implode(randomSort($arr), " "), "</br>";
-echo implode(bubbleSort($arr), " "), "</br>";
-echo implode(quickSort($arr), " "), "</br>";
-echo implode(gnomeSort($arr), " "), "</br>";
-
-// TODO COMPARE TIME
 
 function ordered($A) {
   for ($i = 0; $i < count($A) - 1; $i++) {

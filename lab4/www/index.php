@@ -39,7 +39,7 @@ function printLoop($start, $step, $end) {
   }
 
   if ($start === $end) {
-    echo 'Start equals to end <br/><br/>';
+    echo 'Start point equals end point <br/><br/>';
     return;
   }
 
