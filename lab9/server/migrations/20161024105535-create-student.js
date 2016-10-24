@@ -8,8 +8,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      region: Sequelize.INTEGER,
-      form: Sequelize.INTEGER,
+      region: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      form: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
       mark1: Sequelize.INTEGER,
       mark2: Sequelize.INTEGER,
       mark3: Sequelize.INTEGER

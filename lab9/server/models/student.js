@@ -3,12 +3,10 @@ module.exports = function (sequelize, DataTypes) {
   var Student = sequelize.define('Student', {
     region: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       validate: { min: 0 }
     },
     form: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       validate: { min: 2, max: 12 }
     },
     mark1: {
