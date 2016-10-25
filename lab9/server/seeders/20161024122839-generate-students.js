@@ -29,19 +29,13 @@ module.exports = {
       }).join('\n')
       return fsp.writeFile(tmpFile, data)
     }).then(() => {
-      console.log('Data was written to temp file.')
       return queryInterface.sequelize.query(loadDataQuery, { replacements: { file: tmpFile } })
     }).then(() => {
-      console.log('Data was written to database.')
       return fsp.unlink(tmpFile)
-    }).catch((err) => {
-      return console.error(err)
     })
   },
 
   down: function (queryInterface, Sequelize) {
-    return queryInterface.bulkDelete('Student', null, {}).catch((err) => {
-      return console.error(err)
-    })
+    return queryInterface.bulkDelete('Student', null, {})
   }
 }

@@ -1,29 +1,25 @@
 'use strict'
 
-// No NULL check (!)
+// Contains NULL check
 const updateMeanQuery = `
 UPDATE STUDENT
-  SET MARK_MEAN = (MARK1 + MARK2 + MARK3) / 3
+  SET MARK_MEAN = (Coalesce(MARK1, 0) + Coalesce(MARK2, 0) + Coalesce(MARK3, 0)) /
+         (Case When MARK1 Is Null Then 0 Else 1 End +
+          Case When MARK2 Is Null Then 0 Else 1 End +
+          Case When MARK3 Is Null Then 0 Else 1 End)
+`
+
+const deleteMeanQuery = `
+UPDATE STUDENT
+  SET MARK_MEAN = NULL
 `
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
-    return Promise.resolve().then(() => {
-      return queryInterface.sequelize.query(updateMeanQuery)
-    }).then(() => {
-      console.log('Data was written to database.')
-    }).catch((err) => {
-      return console.error(err)
-    })
+    return queryInterface.sequelize.query(updateMeanQuery)
   },
 
   down: function (queryInterface, Sequelize) {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkDelete('Person', null, {})
-    */
+    return queryInterface.sequelize.query(deleteMeanQuery)
   }
 }

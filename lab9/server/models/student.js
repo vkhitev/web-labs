@@ -20,6 +20,10 @@ module.exports = function (sequelize, DataTypes) {
     mark3: {
       type: DataTypes.INTEGER,
       validate: { min: 1, max: 12 }
+    },
+    mark_mean: {
+      type: DataTypes.FLOAT,
+      validate: { min: 1, max: 12 }
     }
   })
   return Student
