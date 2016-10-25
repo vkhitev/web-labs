@@ -1,4 +1,9 @@
 'use strict'
+
+function avg (...args) {
+  return args.reduce((x, y) => x + y || 0, 0) / args.length
+}
+
 module.exports = function (sequelize, DataTypes) {
   var Student = sequelize.define('Student', {
     region: {
@@ -24,6 +29,14 @@ module.exports = function (sequelize, DataTypes) {
     mark_mean: {
       type: DataTypes.FLOAT,
       validate: { min: 1, max: 12 }
+    }
+  }, {
+    validate: {
+      function () {
+        if (this.mark_mean !== avg(this.mark1, this.mark2, this.mark3)) {
+          throw new Error('Mark mean must be equal to average value of marks')
+        }
+      }
     }
   })
   return Student

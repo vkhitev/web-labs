@@ -1,13 +1,17 @@
 var models = require('./server/models/')
 models.sequelize
   .authenticate().then(() => {
-    models.Student.create({
+    return models.Student.create({
       region: 0,
       form: 2,
-      mark_mean: 100
+      mark1: 1,
+      mark2: 3,
+      mark3: 5,
+      mark_mean: 3
     })
-    console.log('Everything ok')
+  }).then(() => {
+    return models.sequelize.close()
   })
   .catch(function (error) {
-    console.log('Error creating connection:', error)
+    return console.log('Error creating connection:', error)
   })
