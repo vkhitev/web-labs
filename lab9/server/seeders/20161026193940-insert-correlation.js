@@ -38,7 +38,7 @@ const den = `( STDDEV_POP(s.mark_mean) * STDDEV_POP(s.test_mean) )`
 const cov = `${num} / ${den}`
 
 const insertCorQuery = `
-INSERT INTO correlation
+INSERT INTO correlation (cor1, cor2, cor3, cor4, cor5, cor6, cor7)
   VALUES (
     (SELECT ${cov} FROM student s WHERE (${cond1})),
     (SELECT ${cov} FROM student s WHERE (${cond2})),
