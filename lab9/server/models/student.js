@@ -41,12 +41,22 @@ module.exports = function (sequelize, DataTypes) {
     test3: {
       type: DataTypes.FLOAT,
       validate: { min: 100, max: 200 }
+    },
+    test_mean: {
+      type: DataTypes.FLOAT,
+      validate: { min: 100, max: 200 }
     }
   }, {
     validate: {
-      function () {
+      validateMarkMean () {
         if (this.mark_mean !== avg(this.mark1, this.mark2, this.mark3)) {
           throw new Error('Mark mean must be equal to average value of marks')
+        }
+      },
+
+      validateTestMean () {
+        if (this.test_mean !== avg(this.test1, this.test2, this.test3)) {
+          throw new Error('Test mean must be equal to average value of tests')
         }
       }
     }
