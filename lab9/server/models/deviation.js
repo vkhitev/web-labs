@@ -13,6 +13,14 @@ module.exports = function (sequelize, DataTypes) {
     big_mark_dev: {
       type: DataTypes.INTEGER,
       validate: { min: 0 }
+    },
+    small_test_dev: {
+      type: DataTypes.INTEGER,
+      validate: { min: 0 }
+    },
+    big_test_dev: {
+      type: DataTypes.INTEGER,
+      validate: { min: 0 }
     }
   })
   return Deviation
