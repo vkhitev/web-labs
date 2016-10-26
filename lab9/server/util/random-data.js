@@ -15,4 +15,16 @@ function getRandomStudents (amount) {
   return retval
 }
 
+function getRandomTests (amount) {
+  let retval = []
+  for (let i = 0; i < amount; i++) {
+    const test1 = randomIntInc(100, 200)
+    const test2 = randomIntInc(100, 200)
+    const test3 = randomIntInc(100, 200)
+    retval[i] = { test1, test2, test3 }
+  }
+  return retval
+}
+
 exports.getRandomStudents = getRandomStudents
+exports.getRandomTests = getRandomTests

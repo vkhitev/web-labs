@@ -9,6 +9,10 @@ module.exports = {
       underscored: true,
       timestamps: false,
       charset: 'utf8'
+    },
+
+    dialectOptions: {
+      multipleStatements: true
     }
   },
   production: {

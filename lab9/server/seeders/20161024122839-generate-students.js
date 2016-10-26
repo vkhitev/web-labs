@@ -1,15 +1,13 @@
 'use strict'
 
 const fsp = require('fs-promise')
-const path = require('path')
 
 const rand = require('../util/random-data')
 
-const tmpDir = 'C:/ProgramData/MySQL/MySQL Server 5.5/Uploads/'
-const tmpFile = path.join(tmpDir, 'tmp.txt')
+const { tmpFile, numberOfEntities } = require('./config.json')
 
 const loadDataQuery = `
-LOAD DATA INFILE :file INTO TABLE student
+LOAD DATA LOCAL INFILE :file INTO TABLE student
 	FIELDS TERMINATED BY ' '
     LINES TERMINATED BY '\n'
     (@col1, @col2, @col3, @col4, @col5)
@@ -23,7 +21,7 @@ LOAD DATA INFILE :file INTO TABLE student
 module.exports = {
   up: function (queryInterface, Sequelize) {
     return Promise.resolve().then(() => {
-      const data = rand.getRandomStudents(5).map((student) => {
+      const data = rand.getRandomStudents(numberOfEntities).map((student) => {
         const { region, form, mark1, mark2, mark3 } = student
         return `${region} ${form} ${mark1} ${mark2} ${mark3}`
       }).join('\n')

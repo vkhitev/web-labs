@@ -29,6 +29,18 @@ module.exports = function (sequelize, DataTypes) {
     mark_mean: {
       type: DataTypes.FLOAT,
       validate: { min: 1, max: 12 }
+    },
+    test1: {
+      type: DataTypes.FLOAT,
+      validate: { min: 100, max: 200 }
+    },
+    test2: {
+      type: DataTypes.FLOAT,
+      validate: { min: 100, max: 200 }
+    },
+    test3: {
+      type: DataTypes.FLOAT,
+      validate: { min: 100, max: 200 }
     }
   }, {
     validate: {
