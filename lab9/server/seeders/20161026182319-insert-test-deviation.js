@@ -16,7 +16,6 @@ COUNT (CASE WHEN
   THEN 1 END)
 `
 
-// some govnokod
 const insertDevQuery = `
 UPDATE
   deviation

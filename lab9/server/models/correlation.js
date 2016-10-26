@@ -29,6 +29,10 @@ module.exports = function (sequelize, DataTypes) {
     cor7: {
       type: DataTypes.FLOAT,
       validate: { min: -1, max: 1 }
+    },
+    cor8: {
+      type: DataTypes.FLOAT,
+      validate: { min: -1, max: 1 }
     }
   })
   return Correlation

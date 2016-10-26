@@ -26,5 +26,6 @@ function getRandomTests (amount) {
   return retval
 }
 
+exports.randomIntInc = randomIntInc
 exports.getRandomStudents = getRandomStudents
 exports.getRandomTests = getRandomTests
